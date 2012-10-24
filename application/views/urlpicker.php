@@ -1,7 +1,10 @@
-<h1>Entrez une url ci-dessous!</h1>
-	
-<?php echo form_open('urlfinder/analyser'); ?>
-    <label for="url">Url</label>
-    <input type="text" id="url" name="url"/>
-    <input type="submit" value="vérifier" />
+
+<h1> URL PICKER </h1>
+<h2 class=stitre>Entrez une url ci-dessous &nbsp;!</h2>
+<?php	
+$attributes = array('class' => 'form-wrapper');
+ echo form_open('urlfinder/analyser',$attributes); ?>
+    <label for="url"></label>
+    <input type="text" id="search" name="url" />
+    <input type="submit" id="submit" value="vérifier" />
 </form> 

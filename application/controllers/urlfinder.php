@@ -14,6 +14,8 @@ class urlfinder extends CI_Controller {
 	public function lister()
 	{
 
+		$this->load->helper('form');
+
 		$this->load->model('M_urlfinder');
 		
 		$dataList['liens'] = $this->M_urlfinder->lister();
@@ -26,6 +28,9 @@ class urlfinder extends CI_Controller {
 	
 	public function analyser ()
 	{
+
+
+
 		$ch = curl_init();
 
 		curl_setopt($ch, CURLOPT_HEADER, 0);
@@ -51,7 +56,7 @@ class urlfinder extends CI_Controller {
 		$html = utf8_decode($html);
 
 		$dom = new DOMDocument();
-		
+
 		@$dom->loadHTML($html);
 
 		$nodes = $dom->getElementsByTagName("title");
@@ -87,7 +92,7 @@ class urlfinder extends CI_Controller {
 	
 	public function ajouter ()
 	{
-		$this->load->model('M_urlfinder');
+		$this->load->model('m_urlfinder');
 		
 		$data['titre'] = $this->input->post('titre');
 
@@ -97,7 +102,7 @@ class urlfinder extends CI_Controller {
 
 		$data['img'] = $this->input->post('img');
 		
-		$this->M_urlfinder->inserdb($data);
+		$this->m_urlfinder->inserdb($data);
 				
 		$this->lister();		
 		
@@ -105,10 +110,51 @@ class urlfinder extends CI_Controller {
 	
 	public function supprimer()
 	{
-		$this->load->model('M_urlfinder');
+		$this->load->model('m_urlfinder');
 		
-		$this->M_urlfinder->supprimer($this->uri->segment(3));
+		$this->m_urlfinder->supprimer($this->uri->segment(3));
 
 		$this->lister();
+	}
+
+public function preview()
+	{
+		$this->load->model('m_urlfinder');
+		
+		$this->load->helper('form');
+		
+		$monPost = $this->m_urlfinder->voir($this->uri->segment(3));
+
+		$data['titre'] = $monPost->title;
+		
+		$data['lien'] = $monPost->url;
+		
+		$data['description'] = $monPost->desc;
+		
+		$data['img'] = $monPost->src;
+		
+		$data['id'] = $monPost->id;
+		
+		
+		$dataLayout['vue'] = $this->load->view('modifier', $data, true);
+		
+		$this->load->view('layout', $dataLayout);
+
+	}
+	
+	public function modif()
+	{
+		$this->load->model('m_urlfinder');
+
+		$data['titre'] = $this->input->post('titre');
+		$data['lien'] = $this->input->post('lien');
+		$data['description'] = $this->input->post('description');
+		$data['img'] = $this->input->post('img');
+		$this->m_urlfinder->modifier($this->input->post('id'), $data);
+		
+		$this->load->helper('form');
+		$this->lister();
+		
+		
 	}
 }
