@@ -1,0 +1,114 @@
+<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+
+class urlfinder extends CI_Controller {
+
+	public function index()
+	{
+		$this->load->helper('form');
+
+		$dataLayout['vue'] = $this->load->view('urlpicker', null, true);
+
+		$this->load->view('layout', $dataLayout);
+	}
+	
+	public function lister()
+	{
+
+		$this->load->model('M_urlfinder');
+		
+		$dataList['liens'] = $this->M_urlfinder->lister();
+		
+		$dataLayout['vue'] = $this->load->view('lister', $dataList, TRUE);
+		
+		$this->load->view('layout', $dataLayout);
+	
+	}
+	
+	public function analyser ()
+	{
+		$ch = curl_init();
+
+		curl_setopt($ch, CURLOPT_HEADER, 0);
+
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+
+		curl_setopt($ch, CURLOPT_URL, $this->input->post('url'));
+
+		curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
+
+		$html = curl_exec($ch);
+
+		if(!$html){
+
+			redirect(base_url());
+
+		}else{
+		
+		
+		
+		curl_close($ch);
+
+		$html = utf8_decode($html);
+
+		$dom = new DOMDocument();
+		
+		@$dom->loadHTML($html);
+
+		$nodes = $dom->getElementsByTagName("title");
+
+		$dataLayout['title'] = $nodes->item(0)->nodeValue;
+		
+		$nodes = $dom->getElementsByTagName("img");
+
+		foreach($nodes as $node){
+
+		$dataLayout['srcImg'][] = $node->getAttribute("src");
+			//echo ('<img src="' + $nodei->getAttribute("src") + '" />');
+		}
+		$dataLayout['lien'] = $this->input->post('url');
+
+		$nodes = $dom->getElementsByTagName("meta");
+
+		foreach($nodes as $node){
+
+			if(strtolower($node->getAttribute("name") == "description")){
+
+				$dataLayout['description'] = $node->getAttribute("content");
+			}
+		}
+
+		$this->load->helper('form');
+
+		$dataLayout['vue'] = $this->load->view('listing', $dataLayout, true);
+
+		$this->load->view('layout', $dataLayout);
+	}
+}
+	
+	public function ajouter ()
+	{
+		$this->load->model('M_urlfinder');
+		
+		$data['titre'] = $this->input->post('titre');
+
+		$data['lien'] = $this->input->post('lien');
+
+		$data['description'] = $this->input->post('description');
+
+		$data['img'] = $this->input->post('img');
+		
+		$this->M_urlfinder->inserdb($data);
+				
+		$this->lister();		
+		
+	}
+	
+	public function supprimer()
+	{
+		$this->load->model('M_urlfinder');
+		
+		$this->M_urlfinder->supprimer($this->uri->segment(3));
+
+		$this->lister();
+	}
+}
