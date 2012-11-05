@@ -40,6 +40,8 @@ body, button, input, select, textarea { font-family: sans-serif; color: #222; }
     General Typography
    ========================================================================== */
 
+body {font-family: 'Droid Sans', sans-serif; color: white;}
+
 abbr[title] { border-bottom: 1px dotted; }
 
 b, strong { font-weight: bold; }
@@ -198,11 +200,34 @@ body{
 	
 	
 }
+#welcomeMessage{
+  text-align:right;
+  width:100%;
+}
+
+#welcomeMessage p{
+  margin-right: 2.5em;
+  margin-top: 1em;
+}
+#container{
+  margin-top: 2.5em;
+  width:960px;
+  margin: 0 auto;
+}
+
+
+
+#logOut a{
+ color: #E48E24;
+}
 
 h1{
-width: 138px; height: 202px;
+width: 138px;
+ height: 202px;
   background: url("../img/logo.png");
   text-indent: -9999px;
+  margin: 0 auto;
+
 }
 
 .stitre{
@@ -213,6 +238,12 @@ text-align:center;
 color: white;
 font-size:2.5em;
 margin-top:1em;
+
+}
+
+.imgList img{
+  width: 100px; 
+
 
 }
 
@@ -325,6 +356,33 @@ margin-top:1em;
   border: 0;
 }
 
+
+
+input [name=check] {
+  float: right;    
+  border: 1px solid #00748f;
+  height: 42px;
+  width: 100px;
+  padding: 0;
+  cursor: pointer;
+  font: bold 15px Arial, Helvetica;
+  color: #fafafa;
+  text-transform: uppercase;    
+  background-color: #0483a0;
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#31b2c3), to(#0483a0));
+  background-image: -webkit-linear-gradient(top, #31b2c3, #0483a0);
+  background-image: -moz-linear-gradient(top, #31b2c3, #0483a0);
+  background-image: -ms-linear-gradient(top, #31b2c3, #0483a0);
+  background-image: -o-linear-gradient(top, #31b2c3, #0483a0);
+  background-image: linear-gradient(top, #31b2c3, #0483a0);
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;      
+  text-shadow: 0 1px 0 rgba(0, 0 ,0, .3);
+  -moz-box-shadow: 0 1px 0 rgba(255, 255, 255, 0.3) inset, 0 1px 0 #fff;
+  -webkit-box-shadow: 0 1px 0 rgba(255, 255, 255, 0.3) inset, 0 1px 0 #fff;
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.3) inset, 0 1px 0 #fff;
+}
 
 
 

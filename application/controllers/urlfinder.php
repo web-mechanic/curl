@@ -68,7 +68,7 @@ class urlfinder extends CI_Controller {
 		foreach($nodes as $node){
 
 		$dataLayout['srcImg'][] = $node->getAttribute("src");
-			//echo ('<img src="' + $nodei->getAttribute("src") + '" />');
+
 		}
 		$dataLayout['lien'] = $this->input->post('url');
 
@@ -79,6 +79,7 @@ class urlfinder extends CI_Controller {
 			if(strtolower($node->getAttribute("name") == "description")){
 
 				$dataLayout['description'] = $node->getAttribute("content");
+			
 			}
 		}
 
@@ -157,4 +158,7 @@ public function preview()
 		
 		
 	}
+
+
+
 }

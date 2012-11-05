@@ -1,4 +1,6 @@
-<div id="body">
+<div id="container">
+
+	
     <?php echo form_open('urlfinder/ajouter'); ?>
     
 	<label for="titre">Titre :</label>
@@ -12,15 +14,15 @@
 	<h3><?php echo $description; ?></h3>
 	
 	<p>Choisissez une image :</p>
-	
-	<ul>
+	<button id="previous">Précédent</button>
+	<ul >
 	    <?php foreach($srcImg as $src): ?>
 		<li class="choice">
-		    <label for="img"><?php  echo('<img height="75px" src="' . $src . '" />'); ?></label>
-		    <input type="radio" name="img" value="<?php  echo $src ?>">
+		    <label for="img"><?php  echo('<img height="75px" width="75px" src="' . $src . '" />'); ?></label>
+		    <input class="selectionner" type="radio" name="img" value="<?php  echo $src ?>">
 		</li>    
 	    <?php endforeach; ?>
+
+	    <button id="next">Suivant</button>
 	    <input type="submit" value="J'ai choisi !" name="choix">
 	</ul>
-    </form>
-</div>

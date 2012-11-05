@@ -38,7 +38,7 @@
 |
 */
 
-$route['default_controller'] = "urlfinder";
+$route['default_controller'] = "member";
 $route['404_override'] = '';
 
 
