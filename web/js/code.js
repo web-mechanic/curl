@@ -3,10 +3,10 @@ $(function(){
 	
 	var $images = $(".choice"); 
 	
-	$images.first().children('ul').children('input').attr("checked", "checked");
+	$images.first().children('.choice').children('input').attr("checked", "checked");
 	
 	$images.not(':first').hide();
-	$(".selectionner").hide();
+	//$(".selectionner").hide();
 
 	
 	$("#next").on("click", switchNext);
@@ -24,7 +24,7 @@ $(function(){
 			$nextImage.fadeIn('fast');
 		});
 		
-		$nextImage.children('ul').children('input').attr("checked", "checked");
+		$nextImage.children('.choice').children('input').attr("checked", "checked");
 		
 	}
 	
@@ -40,7 +40,7 @@ $(function(){
 			$nextImage.fadeIn('fast');
 		});
 		
-		$nextImage.children('ul').children('input').attr("checked", "checked");
+		$nextImage.children('.choice').children('input').attr("checked", "checked");
 	}
 	
 });

@@ -1,6 +1,6 @@
-<div id="container">
+<div id="containerConnex">
 	<h2>Connectez-vous &nbsp;!</h2>
-	
+	<div class="form-wrapper">
 	<?php
 	$attributes = array('class' => 'form-wrapper');
 		echo form_open('member/login', array('method' => 'post'));
@@ -27,5 +27,5 @@
 		echo form_close();
 	?>
 	
-	
+	</div>
 </div>
